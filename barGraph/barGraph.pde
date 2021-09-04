@@ -1,6 +1,5 @@
 // Reddit: u/d_mystery
-// You can change these
-String title = "Share of Reddit Traffic by Country (Excluding the US)"; // Set sliceMin to 0 to include US
+String title = "Share of Reddit Traffic by Country"; // Set sliceMin to 1 to exclude US
 
 // All of these control the size/position of the square that
 // Contains all of the bars
@@ -14,8 +13,8 @@ float flagPadding = 4; // Space between the flag and the outside of the bar (hor
 float textPaddingLeft = 10; // Space between the country name text and the bar (horizontal)
 float textPaddingRight = 5; // Space between the number of users text and the bar (horizontal)
 
-int sliceMin = 0; // Top rank, starting from 0 (eg 0 -> united states at top, 2 -> india at the top)
-int sliceMax = 12; // Bottom rank, starting from 0, up to 25
+int sliceMin = 1; // Top rank, starting from 0 (eg 0 -> united states at top, 2 -> UK at the top)
+int sliceMax = 25; // Bottom rank, starting from 0, up to 25
 int backgroundColor = 255;
 
 boolean saveFile = true; // Save the image as png
@@ -130,7 +129,6 @@ color averagePixelColor(PImage image) {
   float[] greens = new float[num_pixels];
   float[] blues = new float[num_pixels];
   for (int loc = 0; loc < num_pixels; loc++) {
-    // The functions red(), green(), and blue() pull out the 3 color components from a pixel.
     reds[loc] = red(image.pixels[loc]);
     greens[loc] = green(image.pixels[loc]);
     blues[loc] = blue(image.pixels[loc]);
