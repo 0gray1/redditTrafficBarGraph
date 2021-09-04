@@ -1,22 +1,25 @@
 // Reddit: u/d_mystery
+
+// Variables below can be customized
 String title = "Share of Reddit Traffic by Country"; // Set sliceMin to 1 to exclude US
+
+int sliceMin = 0; // Top rank, starting from 0 (eg 0 -> united states at top, 2 -> UK at the top)
+int sliceMax = 12; // Bottom rank, starting from 0, up to 25
+float scale = 1; // Controls the size of the bar graph, default (scale=1) is 1600 * 900
 
 // All of these control the size/position of the square that
 // Contains all of the bars
-float yMin = 100;
-float yMax = 875;
-float xMin = 150;
-float xMax = 1525;
+float yMin = 100 * scale;
+float yMax = 875 * scale;
+float xMin = 150 * scale;
+float xMax = 1525 * scale;
 
-float padding = 10; // Space between bars (vertical)
-float flagPadding = 4; // Space between the flag and the outside of the bar (horizontal & vertical)
-float textPaddingLeft = 10; // Space between the country name text and the bar (horizontal)
-float textPaddingRight = 5; // Space between the number of users text and the bar (horizontal)
+float padding = 10 * scale; // Space between bars (vertical)
+float flagPadding = 4 * scale; // Space between the flag and the outside of the bar (horizontal & vertical)
+float textPaddingLeft = 10 * scale; // Space between the country name text and the bar (horizontal)
+float textPaddingRight = 5 * scale; // Space between the number of users text and the bar (horizontal)
 
-int sliceMin = 1; // Top rank, starting from 0 (eg 0 -> united states at top, 2 -> UK at the top)
-int sliceMax = 25; // Bottom rank, starting from 0, up to 25
 int backgroundColor = 255;
-
 boolean saveFile = true; // Save the image as png
 
 // Don't touch these
@@ -27,8 +30,13 @@ PImage[] flags;
 color[] flagColors;
 Data data;
 
+void settings() {
+  int w = round(1600 * scale);
+  int h = round(900 * scale);
+  size(w, h);
+}
+
 void setup() {
-  size(1600, 900);
   int sliceLength = sliceMax - sliceMin;
   data = new Data();
   countries = slice(data.keys(), sliceMin, sliceMax);
@@ -86,30 +94,30 @@ void draw() {
     // Country name (on the left of the bar)
     fill(flagColor);
     textAlign(RIGHT, CENTER);
-    textSize(18);
+    textSize(18 * scale);
     if (country == "S.-Korea") {
       country = "South Korea";
     }
     if (country == "New-Zealand") {
       country = "New Zealand";
     }
-    text(country, xMin - textPaddingLeft, startY + yMin + barHeight / 2 - 3);
+    text(country, xMin - textPaddingLeft, startY + yMin + barHeight / 2 - 3 * scale);
     
     // Number of users (on the right of the bar)
     textAlign(LEFT, CENTER);
-    textSize(12);
+    textSize(12 * scale);
     // text(users + "M", xMin + barWidth + textPaddingRight, startY + yMin + barHeight / 2 - 3);
     // Round to nearest .1
     int percentInt = round((users / totalTraffic) * 1000);
     float percent = float(percentInt) / 10;
-    text(percent + "%", xMin + barWidth + textPaddingRight, startY + yMin + barHeight / 2 - 3);
+    text(percent + "%", xMin + barWidth + textPaddingRight, startY + yMin + barHeight / 2 - 3 * scale);
   }
   
   // Title
   fill(0);
   textAlign(CENTER, CENTER);
-  textSize(32);
-  text(title, 800, yMin/2);
+  textSize(32 * scale);
+  text(title, width / 2, yMin/2);
   
   if (saveFile) {
     saveFrame(title + ".png");
