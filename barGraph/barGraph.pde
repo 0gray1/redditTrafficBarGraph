@@ -3,7 +3,7 @@
 // Variables below can be customized
 String title = "Share of Reddit Traffic by Country"; // Set sliceMin to 1 to exclude US
 
-int sliceMin = 0; // Top rank, starting from 0 (eg 0 -> united states at top, 2 -> UK at the top)
+int sliceMin = 0; // Top rank, starting from 0 (eg 0 -> united states at top, 1 -> UK at the top)
 int sliceMax = 12; // Bottom rank, starting from 0, up to 25
 float scale = 1; // Controls the size of the bar graph, default (scale=1) is 1600 * 900
 
